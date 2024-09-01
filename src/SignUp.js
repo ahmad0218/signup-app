@@ -25,18 +25,18 @@ const SignUp = () => {
     telephone: "",
     username: "",
     password: "",
-  })
+  });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const endpoint = process.env.REACT_APP_API_ENDPOINT
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
     try {
       const response = await fetch(`${endpoint}/signup`, {
         method: "POST",
@@ -44,19 +44,17 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
-      console.log(response);
-      console.log(endpoint);
+      });
       if (response.ok) {
-        alert("Sign-Up Successful!")
+        alert("Sign-Up Successful!");
       } else {
-        alert("Sign-Up Failed.")
+        alert("Sign-Up Failed.");
       }
     } catch (error) {
-      console.error("Error:", error)
-      alert("An error occurred.")
+      console.error("Error:", error);
+      alert("An error occurred.");
     }
-  }
+  };
 
   return (
     <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
@@ -192,4 +190,4 @@ const SignUp = () => {
   );
 }
 
-export default SignUp
+export default SignUp;
