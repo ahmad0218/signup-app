@@ -1,6 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import {
+  CButton,
+  CCard,
+  CCardBody,
+  CCol,
+  CContainer,
+  CForm,
+  CFormInput,
+  CInputGroup,
+  CInputGroupText,
+  CRow,
+  CFormSelect,
+} from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilUser, cilLockLocked, cilEnvelopeOpen, cilPhone, cilBuilding } from '@coreui/icons'
 
-function SignUp() {
+const SignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -10,19 +25,18 @@ function SignUp() {
     telephone: "",
     username: "",
     password: "",
-  });
+  })
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Call the appropriate API endpoint based on environment
-    const endpoint = process.env.REACT_APP_API_ENDPOINT;
+    e.preventDefault()
+    const endpoint = process.env.REACT_APP_API_ENDPOINT
     try {
       const response = await fetch(`${endpoint}/signup`, {
         method: "POST",
@@ -30,113 +44,152 @@ function SignUp() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      });
+      })
+      console.log(response);
+      console.log(endpoint);
       if (response.ok) {
-        alert("Sign-Up Successful!");
+        alert("Sign-Up Successful!")
       } else {
-        alert("Sign-Up Failed.");
+        alert("Sign-Up Failed.")
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred.");
+      console.error("Error:", error)
+      alert("An error occurred.")
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>First Name:</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          required
-        />
-      </div>
+    <div className="bg-body-tertiary min-vh-100 d-flex flex-row align-items-center">
+      <CContainer>
+        <CRow className="justify-content-center">
+          <CCol md={9} lg={7} xl={6}>
+            <CCard className="mx-4">
+              <CCardBody className="p-4">
+                <CForm onSubmit={handleSubmit}>
+                  <h1>Sign Up</h1>
+                  <p className="text-body-secondary">Create your account</p>
 
-      <div>
-        <label>Last Name:</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          required
-        />
-      </div>
+                  <CInputGroup className="mb-3">
+                  <CRow>
+                    <CCol xs>
+                      <CFormInput
+                        placeholder="First Name"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </CCol>
+                    <CCol xs>
+                      <CFormInput
+                        placeholder="Last Name"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </CCol>
+                  </CRow>
+                  </CInputGroup>
 
-      <div>
-        <label>Role:</label>
-        <select
-          name="role"
-          value={formData.role}
-          onChange={handleChange}
-          required
-        >
-          <option value="Buyer">Buyer</option>
-          <option value="Supplier">Supplier</option>
-        </select>
-      </div>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText as="label" htmlFor="inputGroupSelect01">
+                      Role
+                    </CInputGroupText>
+                    <CFormSelect
+                      id="inputGroupSelect01"
+                      name="role"
+                      value={formData.role}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Choose...</option>
+                      <option value="Buyer">Buyer</option>
+                      <option value="Supplier">Supplier</option>
+                    </CFormSelect>
+                  </CInputGroup>
 
-      <div>
-        <label>Email Address:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-      </div>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilEnvelopeOpen} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="email"
+                      placeholder="Email Address"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </CInputGroup>
 
-      <div>
-        <label>Organisation:</label>
-        <input
-          type="text"
-          name="organisation"
-          value={formData.organisation}
-          onChange={handleChange}
-          required
-        />
-      </div>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilBuilding} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Organisation"
+                      name="organisation"
+                      value={formData.organisation}
+                      onChange={handleChange}
+                      required
+                    />
+                  </CInputGroup>
 
-      <div>
-        <label>Telephone:</label>
-        <input
-          type="tel"
-          name="telephone"
-          value={formData.telephone}
-          onChange={handleChange}
-          required
-        />
-      </div>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilPhone} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="tel"
+                      placeholder="Telephone"
+                      name="telephone"
+                      value={formData.telephone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </CInputGroup>
 
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-      </div>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Username"
+                      name="username"
+                      value={formData.username}
+                      onChange={handleChange}
+                      required
+                    />
+                  </CInputGroup>
 
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-      </div>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilLockLocked} />
+                    </CInputGroupText>
+                    <CFormInput
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </CInputGroup>
 
-      <button type="submit">Sign Up</button>
-    </form>
+                  <div className="d-grid">
+                    <CButton color="success" type="submit">
+                      Create Account
+                    </CButton>
+                  </div>
+                </CForm>
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </CContainer>
+    </div>
   );
 }
 
-export default SignUp;
+export default SignUp
