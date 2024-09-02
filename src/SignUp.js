@@ -13,13 +13,13 @@ import {
   CFormSelect,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilUser, cilLockLocked, cilEnvelopeOpen, cilPhone, cilBuilding } from '@coreui/icons'
+import { cilUser, cilContact, cilLockLocked, cilEnvelopeOpen, cilPhone, cilBuilding } from '@coreui/icons'
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    role: "Buyer",
+    role: "",
     email: "",
     organisation: "",
     telephone: "",
@@ -68,40 +68,41 @@ const SignUp = () => {
                   <p className="text-body-secondary">Create your account</p>
 
                   <CInputGroup className="mb-3">
-                  <CRow>
-                    <CCol xs>
-                      <CFormInput
-                        placeholder="First Name"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        required
-                      />
-                    </CCol>
-                    <CCol xs>
-                      <CFormInput
-                        placeholder="Last Name"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        required
-                      />
-                    </CCol>
-                  </CRow>
+                    <CRow>
+                      <CCol xs>
+                        <CFormInput
+                          placeholder="First Name"
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleChange}
+                          required
+                        />
+                      </CCol>
+                      <CCol xs>
+                        <CFormInput
+                          placeholder="Last Name"
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleChange}
+                          required
+                        />
+                      </CCol>
+                    </CRow>
                   </CInputGroup>
 
                   <CInputGroup className="mb-3">
-                    <CInputGroupText as="label" htmlFor="inputGroupSelect01">
-                      Role
+                    <CInputGroupText>
+                      <CIcon icon={cilContact} />
                     </CInputGroupText>
                     <CFormSelect
                       id="inputGroupSelect01"
+                      placeholder="Role"
                       name="role"
                       value={formData.role}
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Choose...</option>
+                      <option value="">Role</option>
                       <option value="Buyer">Buyer</option>
                       <option value="Supplier">Supplier</option>
                     </CFormSelect>
